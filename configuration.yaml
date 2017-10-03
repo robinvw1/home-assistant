@@ -1,9 +1,9 @@
 homeassistant:
   # Name of the location where Home Assistant is running
-  name: Home
+  name: Batcave
   # Location required to calculate the time the sun rises and sets
-  latitude: 52.755
-  longitude: 5.9653
+  latitude: !secret home_latitude
+  longitude: !secret home_longitude
   # Impacts weather/sunrise data (altitude above sea level in meters)
   elevation: 0
   # metric for Metric, imperial for Imperial
@@ -58,7 +58,11 @@ sensor:
 
 # Text to speech
 tts:
-  - platform: google
+  - platform: amazon_polly
+  aws_access_key_id: !secret aws_access_key_id
+  aws_secret_access_key: !secret aws_secret_access_key
+  region_name: 'eu-west-1'
+  voice: Ruben
 
 group: !include groups.yaml
 automation: !include automations.yaml
